@@ -3,131 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AbbyBunnyCat 的測驗遊戲大廳 🐾</title>
+    <title>AbbyBunnyCat 的夢幻測驗與工具大廳 🐾✨</title>
+    
+    <!-- Open Graph 標籤 (分享至 LINE / FB 預覽圖文) -->
+    <meta property="og:title" content="AbbyBunnyCat 的夢幻測驗與工具大廳 🐾✨">
+    <meta property="og:description" content="快來和可愛小動物一起探索各種有趣的心理測驗與生活小工具吧！">
+    <meta property="og:type" content="website">
+
     <style>
-        body {
-            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
-            background-color: #0d1117;
-            color: #c9d1d9;
+        /* Google Fonts 引入可愛圓體 */
+        @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&display=swap');
+
+        * {
+            box-sizing: border-box;
             margin: 0;
-            padding: 40px 20px;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: #fff9fb;
+            /* 甜美背景波點圖案 */
+            background-image: 
+                radial-gradient(#ffd6e7 15%, transparent 16%),
+                radial-gradient(#e0f2fe 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: #5a4b51;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* 頂部 Header */
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        header h1 {
+            color: #ff6b9d;
+            font-size: 2.3rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+            text-shadow: 2px 2px 0px #fff, 4px 4px 0px #ffd2e1;
+        }
+
+        header p {
+            color: #8a737d;
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 20px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 182, 193, 0.3);
+        }
+
+        /* 主要目錄區域 */
+        main {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .category-section {
+            margin-bottom: 45px;
+        }
+
+        /* 目錄標題樣式 */
+        .category-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ff5e97;
+            background-color: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 22px;
+            border-radius: 30px;
+            border: 2px dashed #ffb6c1;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.2);
+        }
+
+        /* 卡片網格 */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        /* 卡片本體 */
+        .card {
+            background-color: #ffffff;
+            border: 3px solid #ffe3ec;
+            border-radius: 24px;
+            padding: 30px 20px 25px 20px;
+            text-decoration: none;
+            color: #5a4b51;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 8px 20px rgba(255, 182, 193, 0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        header h1 {
-            color: #58a6ff;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-        header p {
-            color: #8b949e;
-            font-size: 1.1rem;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1200px;
-            width: 100%;
-        }
-        .card {
-            background-color: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 30px 20px;
-            text-decoration: none;
-            color: #c9d1d9;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+
         .card:hover {
-            transform: translateY(-8px);
-            border-color: #58a6ff;
-            box-shadow: 0 8px 20px rgba(88, 166, 255, 0.2);
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ff9ebb;
+            box-shadow: 0 15px 30px rgba(255, 158, 187, 0.3);
         }
+
+        /* 卡片內的標籤 Badge */
+        .new-badge {
+            position: absolute;
+            top: -12px;
+            right: 15px;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 12px;
+            box-shadow: 0 3px 8px rgba(255, 117, 140, 0.4);
+        }
+
+        /* 卡片圖示與標題 */
         .card-icon {
-            font-size: 3.5rem;
-            margin-bottom: 15px;
-            display: inline-block;
+            font-size: 3rem;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
+
         .card h2 {
-            margin: 10px 0;
-            font-size: 1.4rem;
-            color: #f0f6fc;
+            font-size: 1.35rem;
+            color: #ff4d8d;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
+
         .card p {
             font-size: 0.95rem;
-            color: #8b949e;
+            color: #7a6871;
             line-height: 1.5;
-            margin: 0;
+            margin-bottom: 15px;
+        }
+
+        /* 可愛小動物動態說明區 */
+        .animal-helper {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #fff5f8;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #ffe0eb;
+            position: relative;
+        }
+
+        .animal-avatar {
+            font-size: 1.6rem;
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        .animal-dialog {
+            font-size: 0.85rem;
+            color: #ff6599;
+            font-weight: 700;
+        }
+
+        /* 卡片 Hover 時動物跳躍加劇 */
+        .card:hover .animal-avatar {
+            animation: happyJump 0.5s infinite alternate ease-in-out;
+        }
+
+        /* 動畫效果 */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        @keyframes happyJump {
+            0% { transform: translateY(0) rotate(-5deg); }
+            100% { transform: translateY(-8px) rotate(5deg); }
+        }
+
+        /* 頁尾 */
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #b59fa8;
+            font-size: 0.9rem;
+        }
+
+        footer span {
+            color: #ff6b9d;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>AbbyBunnyCat 的小測驗大廳 🔮</h1>
-        <p>點擊下方卡片，開啟你的探索旅程吧！</p>
+        <h1>AbbyBunnyCat 的夢幻大廳 🐾✨</h1>
+        <p>點擊卡片開啟測驗，和小動物們一起探索吧！</p>
     </header>
 
-    <main class="grid-container">
+    <main>
 
-        <!-- 新加入的測驗：OracleCard -->
-        <a href="https://abbybunnycat.github.io/OracleCard/?test=true" target="_blank" class="card">
-            <div class="card-icon">🃏</div>
-            <h2>Oracle Card</h2>
-            <p>全新神諭卡測驗，抽取靈魂深處的神秘牌卡。</p>
-        </a>
+        <!-- 分類一：神秘與占卜 -->
+        <section class="category-section">
+            <div class="category-title">
+                <span>🔮</span> 神秘與靈性占卜
+            </div>
+            <div class="grid-container">
 
-        <!-- 測驗：boundary -->
-        <a href="https://abbybunnycat.github.io/boundary/" target="_blank" class="card">
-            <div class="card-icon">🚧</div>
-            <h2>Boundary</h2>
-            <p>點擊進入測驗，探索你的專屬邊界。</p>
-        </a>
+                <!-- OracleCard (新添加/熱門) -->
+                <a href="https://abbybunnycat.github.io/OracleCard/?test=true" target="_blank" rel="noopener noreferrer" class="card">
+                    <span class="new-badge">✨ NEW</span>
+                    <div class="card-icon">🃏</div>
+                    <h2>Oracle Card</h2>
+                    <p>全新神諭卡測驗，抽取靈魂深處的神秘牌卡。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🦊</span>
+                        <span class="animal-dialog">小狐狸：「來抽一張今天的靈魂牌卡吧！」</span>
+                    </div>
+                </a>
 
-        <!-- 測驗：mbti100 -->
-        <a href="https://abbybunnycat.github.io/mbti100/" target="_blank" class="card">
-            <div class="card-icon">🧠</div>
-            <h2>MBTI 100</h2>
-            <p>100% 深入的性格分析小測驗。</p>
-        </a>
+                <!-- Cosmic Oracle -->
+                <a href="https://abbybunnycat.github.io/cosmic_oracle/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">🌌</div>
+                    <h2>Cosmic Oracle</h2>
+                    <p>宇宙神諭，為你當下的迷惘解答惑。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐼</span>
+                        <span class="animal-dialog">熊貓：「抬頭看看星空，宇宙有話對你說～」</span>
+                    </div>
+                </a>
 
-        <!-- 測驗：cosmic_oracle -->
-        <a href="https://abbybunnycat.github.io/cosmic_oracle/" target="_blank" class="card">
-            <div class="card-icon">🌌</div>
-            <h2>Cosmic Oracle</h2>
-            <p>宇宙神諭，為你當下的迷惘解惑。</p>
-        </a>
+                <!-- 觀音靈籤 -->
+                <a href="https://abbybunnycat.github.io/kuanyin/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">🙏</div>
+                    <h2>觀音靈籤</h2>
+                    <p>虔誠祈願，求取你的指引籤詩。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐱</span>
+                        <span class="animal-dialog">招財貓：「心誠則靈，為你祈求平安好運！」</span>
+                    </div>
+                </a>
 
-        <!-- 測驗：office_fortune -->
-        <a href="https://abbybunnycat.github.io/office_fortune/" target="_blank" class="card">
-            <div class="card-icon">💼</div>
-            <h2>Office Fortune</h2>
-            <p>職場運勢大補帖，看看今天工作順不順！</p>
-        </a>
+            </div>
+        </section>
 
-        <!-- 測驗：cosmic-fortune -->
-        <a href="https://abbybunnycat.github.io/cosmic-fortune/" target="_blank" class="card">
-            <div class="card-icon">✨</div>
-            <h2>Cosmic Fortune</h2>
-            <p>連結星空的力量，測出你的今日好運。</p>
-        </a>
+        <!-- 分類二：個性與邊界 -->
+        <section class="category-section">
+            <div class="category-title">
+                <span>🧠</span> 心靈與性格探索
+            </div>
+            <div class="grid-container">
 
-        <!-- 測驗：kuanyin -->
-        <a href="https://abbybunnycat.github.io/kuanyin/" target="_blank" class="card">
-            <div class="card-icon">🙏</div>
-            <h2>觀音靈籤</h2>
-            <p>虔誠祈願，求取你的指引籤詩。</p>
-        </a>
+                <!-- Boundary -->
+                <a href="https://abbybunnycat.github.io/boundary/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">🚧</div>
+                    <h2>Boundary</h2>
+                    <p>點擊進入測驗，探索你的專屬人際邊界。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🦭</span>
+                        <span class="animal-dialog">海豹：「劃清舒服的邊界，才能好好生活哦！」</span>
+                    </div>
+                </a>
+
+                <!-- MBTI 100 -->
+                <a href="https://abbybunnycat.github.io/mbti100/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">🧠</div>
+                    <h2>MBTI 100</h2>
+                    <p>100% 深入的性格分析小測驗。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐰</span>
+                        <span class="animal-dialog">小白兔：「深入探索，看看你是哪種小動物性格！」</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- 分類三：生活與實用工具 -->
+        <section class="category-section">
+            <div class="category-title">
+                <span>🍱</span> 生活、運勢與小工具
+            </div>
+            <div class="grid-container">
+
+                <!-- Food Allocation App (新新增) -->
+                <a href="https://abbybunnycat.github.io/food_allocation_app" target="_blank" rel="noopener noreferrer" class="card">
+                    <span class="new-badge">✨ NEW</span>
+                    <div class="card-icon">🍱</div>
+                    <h2>Food Allocation</h2>
+                    <p>輕鬆規劃美味餐點與食物分配的小幫手。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐿️</span>
+                        <span class="animal-dialog">小松鼠：「今天吃什麼？交給我來幫你分配美味吧！」</span>
+                    </div>
+                </a>
+
+                <!-- Artifact (新新增) -->
+                <a href="https://abbybunnycat.github.io/artifact/" target="_blank" rel="noopener noreferrer" class="card">
+                    <span class="new-badge">✨ NEW</span>
+                    <div class="card-icon">💎</div>
+                    <h2>Artifact</h2>
+                    <p>發現屬於你的獨特寶物與珍藏點滴。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🦝</span>
+                        <span class="animal-dialog">浣熊：「快來看看我找到了什麼厲害的寶物！」</span>
+                    </div>
+                </a>
+
+                <!-- Office Fortune -->
+                <a href="https://abbybunnycat.github.io/office_fortune/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">💼</div>
+                    <h2>Office Fortune</h2>
+                    <p>職場運勢大補帖，看看今天工作順不順！</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐶</span>
+                        <span class="animal-dialog">小狗：「加油打工人！今天也要順順利利喔！」</span>
+                    </div>
+                </a>
+
+                <!-- Cosmic Fortune -->
+                <a href="https://abbybunnycat.github.io/cosmic-fortune/" target="_blank" rel="noopener noreferrer" class="card">
+                    <div class="card-icon">✨</div>
+                    <h2>Cosmic Fortune</h2>
+                    <p>連結星空的力量，測出你的今日好運。</p>
+                    <div class="animal-helper">
+                        <span class="animal-avatar">🐻</span>
+                        <span class="animal-dialog">小熊：「為你接收滿滿的幸運星光～」</span>
+                    </div>
+                </a>
+
+            </div>
+        </section>
 
     </main>
+
+    <footer>
+        <p>© AbbyBunnyCat. Made with <span>♥</span> & Cute Animals.</p>
+    </footer>
 
 </body>
 </html>
